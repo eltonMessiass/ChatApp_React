@@ -6,9 +6,10 @@ import NotFound from './pages/NotFound'
 import ProtectedRoute from './components/ProtectedRoute'
 import { BrowserRouter,Routes,Route, Navigate } from 'react-router-dom'
 
+
 function App() {
   return (
-      <div>
+      <div className='h-screen'>
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<ProtectedRoute> <Home/> </ProtectedRoute>}/>
