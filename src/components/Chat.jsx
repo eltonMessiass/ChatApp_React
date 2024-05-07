@@ -17,13 +17,11 @@ function Chat() {
     },[])
 
     const handleClick = (chatId) => {
-      setIsSelected(ChatId)
+      setSelectedChatId(chatId)
     }
 
   return (
-
-    
-      
+     
     <div className="chats w-full h-full p-0 m-0" >
       {conversation.map(conversation => (    
           <Link to='#' className={`chat w-full px-2 py-1 flex flex-row gap-2 my-2 hover:bg-[#222035] ${conversation.id === selectedChatId ? 'border border-primary' : ''}`} key={conversation.id} onClick={() => handleClick(conversation.id)}>

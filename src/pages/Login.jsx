@@ -1,13 +1,15 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import api from "../api"
 import { useNavigate } from "react-router-dom"
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants"
+import { UserContext } from "../contexts/UserContext"
 
 const Login = () => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
+    const {setUser} = useContext(UserContext)
 
     const route = "api/token/";
 
@@ -20,6 +22,7 @@ const Login = () => {
             const res = await api.post(route, { username, password })
             localStorage.setItem(ACCESS_TOKEN, res.data.access)
             localStorage.setItem(REFRESH_TOKEN, res.data.refresh)
+            setUser(res.data.user);
             navigate("/")
         } catch (error) {
             alert(error)
