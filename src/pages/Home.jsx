@@ -8,9 +8,7 @@ const Home = () => {
   const [selectedChatId, setSelectedChatId] = useState(null);
   const [chats, setChats] = useState([])
   const [messages, setMessages] = useState([])
-  const {user} = useContext(UserContext)
-  const userId = user.id
-  
+  const { userId } = useContext(UserContext)
 
   useEffect(() => {
     getChats()
@@ -19,6 +17,7 @@ const Home = () => {
   const getChats = () => {
     api.get('/api/chats/').then((res) => {
       setChats(res.data)
+      console.log(userId)
     })
   }
 
@@ -76,16 +75,20 @@ const Home = () => {
           </section>
         </aside>
 
-        <div className="messages flex flex-col w-1/4 h-10">
+        <div className="messages flex flex-col w-1/4 h-10 text-xl">
           {messages.map(message => (
-            <p className={message.message_sender === userId ? 'text-primary float-right text-2xl' : ''} key={message.id}>
-              {message.content}
+            <p className={message.message_sender === userId ? ' float-right text-base rounded px-1 ml-4 bg-primary w-fit max-w-1/2 h-10 my-3' : ''} key={message.id}>
+              {message.content},
+              {message.message_sender},
+              {userId}
             </p>
           ))}
         </div>
       </div>
     </div>
   )
+
+
 }
 
 export default Home

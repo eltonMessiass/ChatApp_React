@@ -9,9 +9,10 @@ const Login = () => {
     const [password, setPassword] = useState("")
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
-    const {setUser} = useContext(UserContext)
+    const {setUserId} = useContext(UserContext)
 
     const route = "api/token/";
+    const userDetailRoute = "api/users/user/details/"
 
 
     const handleSubmit = async (e) => {
@@ -22,7 +23,8 @@ const Login = () => {
             const res = await api.post(route, { username, password })
             localStorage.setItem(ACCESS_TOKEN, res.data.access)
             localStorage.setItem(REFRESH_TOKEN, res.data.refresh)
-            setUser(res.data.user);
+            const userId = userDetailRoute.data.id
+            setUserId(userId);
             navigate("/")
         } catch (error) {
             alert(error)
